@@ -9,4 +9,7 @@
 
 ![image](https://user-images.githubusercontent.com/23046900/149176470-aae67109-e2e9-4132-a4e6-e2b84a9e8109.png)
 
+## Challenge 3
+### Create a clock
+![image](https://user-images.githubusercontent.com/23046900/150578218-e6885d8f-6dff-4abc-802a-c23834395179.png)
 
