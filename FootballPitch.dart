@@ -62,7 +62,14 @@ class DrawPitch extends CustomPainter{
     canvas.drawLine(Offset(50,70),Offset(230,70),paint);
     canvas.drawLine(Offset(230,70),Offset(230,0),paint);
     
-    canvas.drawArc(Rect.fromLTRB(50, 0, 230, 80),-2*math.pi/8,math.pi/2,false,paintBorder);
+    canvas.drawArc(Rect.fromLTRB(110, 60, 170, 80),-4*math.pi/2,math.pi,false,paintBorder);
+    // L shifts the arc
+    // T cuts the arc from the top
+    // R width of the arc
+    // B depth of the arc
+    // startAngle -> shifting the in different directions (in radians)
+    // swiftAngle -> cut the arc (in radians)
+    
     
     //draw center circle
     
@@ -77,6 +84,9 @@ class DrawPitch extends CustomPainter{
     canvas.drawLine(Offset(50,length-2),Offset(50,length-2-70),paint);
     canvas.drawLine(Offset(50,length-2-70),Offset(230,length-2-70),paint);
     canvas.drawLine(Offset(230,length-2-70),Offset(230,length-2),paint);
+    
+    canvas.translate(0,length-140-2);
+    canvas.drawArc(Rect.fromLTRB(110, 60, 170, 80),4*math.pi/2,-math.pi,false,paintBorder);
   }
   
   bool shouldRepaint(DrawPitch oldDelegate){
