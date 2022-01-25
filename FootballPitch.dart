@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'dart:math' as math;
+
+void main()=>runApp(MyApp());
+
+class MyApp extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home:FootballGround(),
+    );
+  }
+}
+
+class FootballGround extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return Center(child:Container(
+      height:400,
+      width:280,
+      
+      decoration:BoxDecoration(
+      color:Color(0xff78B833),
+        border:Border.all(color:Colors.white,width:2),
+      ),
+      child:Stack(
+        fit:StackFit.expand,
+                  children:[
+        
+        CustomPaint(painter:DrawPitch()),
+      ],)
+    ),
+    
+    );
+  }
+}
+
+class DrawPitch extends CustomPainter{
+  
+  void paint(Canvas canvas,Size size){
+    canvas.save();
+    double length=400;
+    double width=280;
+    var paint=Paint();
+    paint.strokeWidth=2;
+    paint.color=Colors.white;
+    var paintBorder=Paint();
+    paintBorder.strokeWidth=2;
+    paintBorder.color=Colors.white;
+    paintBorder.style=PaintingStyle.stroke;
+    canvas.translate(0,length/4);
+    canvas.drawLine(Offset(0,length/4),Offset(0+width-2,length/4),paint);
+    canvas.restore();
+    canvas.translate(0,0);
+    
+    //draw 1st end
+    
+    canvas.drawLine(Offset(100,0),Offset(100,20),paint);
+    canvas.drawLine(Offset(100,20),Offset(100+80,20),paint);
+    canvas.drawLine(Offset(100+80,20),Offset(100+80,0),paint);
+    canvas.drawLine(Offset(50,0),Offset(50,70),paint);
+    canvas.drawLine(Offset(50,70),Offset(230,70),paint);
+    canvas.drawLine(Offset(230,70),Offset(230,0),paint);
+    
+    canvas.drawArc(Rect.fromLTRB(50, 0, 230, 80),-2*math.pi/8,math.pi/2,false,paintBorder);
+    
+    //draw center circle
+    
+    canvas.drawCircle(Offset(width/2,length/2),40,paintBorder);
+    
+    //draw 2nd end
+    // -2 because boundary width is 2 and canvas (0,0) 2 inside whole pitch(because of boundart, basically green part)
+    // that's why to cover whole length we need length-2 only, length-4 precisely
+    canvas.drawLine(Offset(100,length-2),Offset(100,length-2-20),paint);
+    canvas.drawLine(Offset(100,length-2-20),Offset(100+80,length-2-20),paint);
+    canvas.drawLine(Offset(100+80,length-2-20),Offset(100+80,length-2),paint);
+    canvas.drawLine(Offset(50,length-2),Offset(50,length-2-70),paint);
+    canvas.drawLine(Offset(50,length-2-70),Offset(230,length-2-70),paint);
+    canvas.drawLine(Offset(230,length-2-70),Offset(230,length-2),paint);
+  }
+  
+  bool shouldRepaint(DrawPitch oldDelegate){
+    return false;
+  }
+}
